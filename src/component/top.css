@@ -1,0 +1,14 @@
+
+
+.Appbar{
+    background-color: blueviolet !important;
+}
+ .addBtn{
+    background-color: blueviolet !important;
+ } 
+
+ .viewBtn{
+    color: blueviolet !important;
+    outline: none;
+    outline-color: blueviolet !important;
+ }
