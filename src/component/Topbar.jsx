@@ -14,17 +14,21 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { MdShoppingCart } from "react-icons/md";
+import { useSearchParams } from 'react-router-dom';
+
 
  // add the file of css
  import './top.css'
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = ['ALL', 'ELECTRONICS', 'MENS COLTHING','WOMENS CLOTHING','JEWELLERY'];
 
 function DrawerAppBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const [searchParams, setSearchParams] = useSearchParams(false);
+  
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -49,6 +53,14 @@ function DrawerAppBar(props) {
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
+
+  // right drawer  case
+
+   const[open,setOpen] =React.useState(false)
+  const carticon =()=>{
+    console.log("hello ji")
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -69,15 +81,24 @@ function DrawerAppBar(props) {
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
             GHOUS STORE
+            
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: 'white' }}>
+              <Button  onClick={()=>setSearchParams
+                ({category:item.toLowerCase()})
+              } key={item} sx={{ color: 'white' }}>
                 {item}
               </Button>
+              
             ))}
+             <span><MdShoppingCart  onClick={carticon}   />  </span>
           </Box>
         </Toolbar>
+        
+       
+
       </AppBar>
       <nav>
         <Drawer
@@ -93,8 +114,10 @@ function DrawerAppBar(props) {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
+          
           {drawer}
         </Drawer>
+        
       </nav>
      
     </Box>

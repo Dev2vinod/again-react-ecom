@@ -1,11 +1,16 @@
 import React, { useState,useEffect } from 'react'
 import DrawerAppBar from '../../component/Topbar'
 import MediaCard from '../../component/CardProduct'
+import ImgMediaCard from '../../component/SingleProduct';
 import axios from 'axios'
+import BasicModal from "../../component/BasicModal";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 const Home = () => {
 
   const[data,setData] =useState([])
+
    
   useEffect(() => {
 
@@ -21,20 +26,77 @@ const Home = () => {
 
     
   }, [])
+
+
+
+   // single product or viewdetail
+    // open and close of basic modal
+    const[open,setOpen] =useState(false)
+
+
+    const[singleProduct,setSingleProduct] =useState({});
+
+    const viewDetail =(id)=>{
+
+
+      console.log("id of product",id) 
+
+
+
+       
+
+
+        axios.get(`https://fakestoreapi.com/products/${id}`).then((res)=>{
+          console.log(res.data,"res of single product")
   
+          setSingleProduct(res.data)
+          setOpen(true)
+
+        }).catch((err)=>{
+          console.log("error of single product of axios",err)
+        })
+         
+      }
+
+     
+      
+       
+
+    
 
   return (
-    <div>
+    <div className='mt-10'>
         <DrawerAppBar />
 
         <div className='flex bg-pink-500 flex-wrap justify-evenly items-center '>
         
         {data.length >0 ? data.map((item,i)=>{
-           return  <MediaCard  product ={item} key={i} />
+           return  <MediaCard  product ={item} key={i} viewDetail ={viewDetail} />
 
-        }):<h1> data is loading</h1> }
+        }):<Alert severity="error" variant="filled" >
+        <AlertTitle>Error</AlertTitle>
+        Data is loading....
+      </Alert>
+  }
         
         </div>
+
+
+
+       { <BasicModal  open={open} singleProduct ={singleProduct}   setOpen={setOpen} />  }
+
+
+ 
+
+
+
+
+
+
+
+
+
+
     </div>
   )
 }

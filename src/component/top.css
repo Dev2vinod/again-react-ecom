@@ -7,7 +7,7 @@
     background-color: blueviolet !important;
  } 
 
- .viewBtn{
+ .viewBtn,.buyBtn{
     color: blueviolet !important;
     outline: none;
     outline-color: blueviolet !important;

@@ -8,7 +8,11 @@ import Typography from '@mui/material/Typography';
 import ReactStars from 'react-stars'
 
 import './top.css'
-export default function MediaCard({product}) {
+export default function MediaCard({product,viewDetail}) {
+
+//  const viewDetail =(id)=>{
+//     console.log("id of product",id)
+//   }
 
 console.log("product in the card",product)
   return (
@@ -39,7 +43,7 @@ console.log("product in the card",product)
       </CardContent>
       <CardActions>
         <Button size="small" variant="contained" color="success"  className='addBtn'>Add To Cart</Button>
-        <Button size="small" variant="outlined"  className='viewBtn'>View Detail</Button>
+        <Button size="small" variant="outlined"  className='viewBtn' onClick={()=>viewDetail(product.id)}>View Detail</Button>
       </CardActions>
     </Card>
   );
