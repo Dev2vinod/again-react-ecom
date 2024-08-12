@@ -1,14 +1,43 @@
-import * as React from 'react';
+import React,{useContext, useState} from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import ReactStars from 'react-stars'
+import ReactStars from 'react-stars';
+import axios from 'axios';
+import CartContext from '../context/Cart';
 
 import './top.css'
 export default function MediaCard({product,viewDetail}) {
+
+  const[data,setData] =useState({})
+  const{cart,setCart} =useContext(CartContext)
+
+  console.log("cart",cart)
+  const addToCart =(id)=>{
+    
+    axios.get(`https://fakestoreapi.com/products/${id}`).then((res)=>{
+      // console.log(res.data,"res of single product")
+
+      setData(res.data)
+      
+
+    }).catch((err)=>{
+      console.log("error of single product of axios",err)
+    })
+   
+
+    const cartData =JSON.parse(localStorage.getItem('cart'))||[]
+    cartData.push(product)
+    localStorage.setItem("cart",JSON.stringify(cartData))
+   setCart(cartData.length)
+   
+
+    console.log("cart",id,cart)
+
+  }
 
 //  const viewDetail =(id)=>{
 //     console.log("id of product",id)
@@ -42,7 +71,7 @@ export default function MediaCard({product,viewDetail}) {
         
       </CardContent>
       <CardActions>
-        <Button size="small" variant="contained" color="success"  className='addBtn'>Add To Cart</Button>
+        <Button size="small" variant="contained" color="success"  className='addBtn' onClick={()=>addToCart(product.id)}>Add To Cart</Button>
         <Button size="small" variant="outlined"  className='viewBtn' onClick={()=>viewDetail(product.id)}>View Detail</Button>
       </CardActions>
     </Card>

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React,{useEffect, useState,useContext} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,7 +16,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { MdShoppingCart } from "react-icons/md";
 import { useSearchParams } from 'react-router-dom';
-
+import Rightdrawer from './Rightdrawer';
+import CartContext from '../context/Cart';
 
  // add the file of css
  import './top.css'
@@ -58,9 +59,29 @@ function DrawerAppBar(props) {
   // right drawer  case
 
    const[open,setOpen] =React.useState(false)
-  const carticon =()=>{
+    const carticon =()=>{
     console.log("hello ji")
+    setOpen(true)
+    
+   
   }
+
+
+    // making the cart length of a cart
+
+    // const[cart,setCart]=useState(0)
+
+    const{cart,setCart} =useContext(CartContext)
+
+    React.useEffect(()=>{
+
+     const cart = JSON.parse(localStorage.getItem('cart') ) || [];
+
+
+    },[])
+
+     
+     
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -85,17 +106,22 @@ function DrawerAppBar(props) {
             
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            
             {navItems.map((item) => (
               <Button  onClick={()=>setSearchParams
                 ({category:item.toLowerCase()})
               } key={item} sx={{ color: 'white' }}>
-                {item}
+          {item}
               </Button>
               
             ))}
-             <span><MdShoppingCart  onClick={carticon}   />  </span>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+
+            <MdShoppingCart  onClick={carticon}   />
+            </Box>
+             
           </Box>
+
+          < Rightdrawer open={open} setOpen={setOpen} />
         </Toolbar>
         
        

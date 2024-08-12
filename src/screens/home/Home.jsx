@@ -7,6 +7,14 @@ import axios from 'axios'
 import BasicModal from "../../component/BasicModal";
 
 import CircularProgress from '@mui/joy/CircularProgress';
+import Chip from '@mui/joy/Chip';
+import Alert from '@mui/material/Alert';
+// import cors from 'cors';
+// import express from 'express';
+// // var app = express()
+// // app.use(cors())
+
+
 
 
 const Home = () => {
@@ -26,7 +34,8 @@ const Home = () => {
         // setData([...data])
         // console.log(data,"from  data")
     }).catch((err)=>{
-        console.log("error from fake store api" ,err)
+        console.log("error from fake store api" ,err.message)
+        
     })
 
     }
@@ -99,15 +108,20 @@ const Home = () => {
     <div className='mt-10'>
         <DrawerAppBar />
 
-        <div className='flex bg-pink-500 flex-wrap justify-evenly items-center '>
+        <div className='flex bg-pink-600 flex-wrap justify-evenly items-center '>
         
         {data.length >0 ? data.map((item,i)=>{
            return  <MediaCard  product ={item} key={i} viewDetail ={viewDetail} />
 
-        }):    <div>
+        }):    <div className='flex flex-col gap-5 items-center justify-evenly bg-[blueviolet] w-full h-screen'>
 
          <CircularProgress variant="outlined" size='lg' thickness={10}  />
-        <h1>data is loading</h1>
+         <Chip   size='lg'>Data is loading...</Chip>
+         <Alert variant="filled" severity="success">
+        <h1>Network Error. <br />
+          Please Check Your Network Connection
+        </h1>
+       </Alert>
         </div> 
 
   }
