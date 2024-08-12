@@ -13,7 +13,7 @@ const style = {
   bgcolor: 'background.paper',
   border: '2px solid blueviolet',
   boxShadow: 24,
-  // p: 4,
+  p: 4,
 };
 
 export default function BasicModal({open,setOpen,singleProduct}) {

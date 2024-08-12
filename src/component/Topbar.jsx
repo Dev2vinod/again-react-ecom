@@ -22,7 +22,7 @@ import { useSearchParams } from 'react-router-dom';
  import './top.css'
 
 const drawerWidth = 240;
-const navItems = ['ALL', 'ELECTRONICS', 'MENS COLTHING','WOMENS CLOTHING','JEWELLERY'];
+const navItems = ['ALL', 'ELECTRONICS', "MEN'S CLOTHING","WOMEN'S CLOTHING",'JEWELERY'];
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -41,7 +41,8 @@ function DrawerAppBar(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem onClick={()=>setSearchParams
+            ({category:item.toLowerCase()})} key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />
             </ListItemButton>

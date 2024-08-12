@@ -14,7 +14,7 @@ export default function MediaCard({product,viewDetail}) {
 //     console.log("id of product",id)
 //   }
 
-console.log("product in the card",product)
+// console.log("product in the card",product)
   return (
     <Card sx={{ width:300 ,marginTop:10}}>
       <div>
