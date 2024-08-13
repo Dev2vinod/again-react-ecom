@@ -12,3 +12,12 @@
     outline: none;
     outline-color: blueviolet !important;
  }
+
+  .checkBtn{
+   background-color: blueviolet !important;
+   width: 90%;
+   margin-top: 15% !important;
+   margin-bottom: 15% !important;
+   /* margin: 4px; */
+   margin-left: 19px !important;
+  }

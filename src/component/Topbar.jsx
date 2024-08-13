@@ -14,10 +14,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+
+// import by me
 import { MdShoppingCart } from "react-icons/md";
 import { useSearchParams } from 'react-router-dom';
 import Rightdrawer from './Rightdrawer';
 import CartContext from '../context/Cart';
+import Badge from '@mui/material/Badge';
 
  // add the file of css
  import './top.css'
@@ -72,13 +75,16 @@ function DrawerAppBar(props) {
     // const[cart,setCart]=useState(0)
 
     const{cart,setCart} =useContext(CartContext)
-
+    const[num,setNum] =useState(0)
+    
     React.useEffect(()=>{
+      
+      const cartData = JSON.parse(localStorage.getItem('cart') ) || [];
+      
+      //  console.log("cart length",cart.length )
+      setNum(cartData.length)
 
-     const cart = JSON.parse(localStorage.getItem('cart') ) || [];
-
-
-    },[])
+    },[cart])
 
      
      
@@ -116,10 +122,17 @@ function DrawerAppBar(props) {
             ))}
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
 
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={num} color="error">
             <MdShoppingCart  onClick={carticon}   />
+                
+              </Badge>
+            </IconButton>
+
             </Box>
              
           </Box>
+          
 
           < Rightdrawer open={open} setOpen={setOpen} />
         </Toolbar>

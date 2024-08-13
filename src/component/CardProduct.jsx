@@ -15,7 +15,7 @@ export default function MediaCard({product,viewDetail}) {
   const[data,setData] =useState({})
   const{cart,setCart} =useContext(CartContext)
 
-  console.log("cart",cart)
+  console.log(" i am context cart",cart)
   const addToCart =(id)=>{
     
     axios.get(`https://fakestoreapi.com/products/${id}`).then((res)=>{
