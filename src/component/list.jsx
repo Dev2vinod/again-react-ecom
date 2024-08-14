@@ -13,6 +13,7 @@ import { CiSquarePlus } from "react-icons/ci";
 import { CiSquareMinus } from "react-icons/ci";
 import Alert from '@mui/material/Alert';
 import CartContext from '../context/Cart';
+import { useNavigate } from 'react-router-dom';
 
 
 {/* <MdDelete />
@@ -40,7 +41,17 @@ export default function EllipsisList({data,updateQty}) {
 
       console.log("new data in storage",cartData)
 
+
+
+
   }
+
+   const  navigate =useNavigate()
+   const checkOut =()=>{
+
+    navigate('./checkout')
+    console.log("hello")
+   }
 
    
     //  console.log(' i am list',data)
@@ -110,7 +121,7 @@ export default function EllipsisList({data,updateQty}) {
 }
      
           <div>
-          <Button variant="contained" size='lg' className='checkBtn'>Check Out</Button>
+          <Button variant="contained" size='lg' className='checkBtn' onClick={checkOut}>Check Out</Button>
           </div>
     </Box>
   );

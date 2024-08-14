@@ -30,34 +30,36 @@ export default function MediaCard({product,viewDetail}) {
    
 
     const cartData =JSON.parse(localStorage.getItem('cart'))||[]
-    cartData.push({...product,qty:1})
-    const index =cartData.findIndex((v)=>v.id===id)
+    const index =cartData.findIndex((v)=>v.id===product.id)
 
     
-    console.log("id in del",id,index)
+    // console.log("id in del",id,index)
 
     
     
+      // console.log("type + ko hit kiya re")
     
     
-    if(type==='+'){
-
-      console.log("type + ko hit kiya re")
+    if(index!==-1){
+      console.log("me working hu")
 
     cartData.splice(index,1,{...cartData[index],qty:cartData[index].qty + 1})
+    
 
-
-    }else{
-    cartData.splice(index,1,{...cartData[index],qty:cartData[index].qty - 1})
 
     }
-
+    else{
+      cartData.push({...product,qty:1})
+    
+      
+    }
+    
+    localStorage.setItem("cart",JSON.stringify(cartData))
+   setCart(cartData.length)
     
 
     // setCart(cartData)
 
-    localStorage.setItem("cart",JSON.stringify(cartData))
-   setCart(cartData.length)
    
 
     // console.log("cart",id,cart)

@@ -29,7 +29,7 @@ export default function DrawerCloseButton({open,setOpen,updateQty}) {
   return (
     <Box sx={{ display: 'flex' }}>
       
-      <Drawer open={open} anchor='right' size='medium' onClose={() => setOpen(false)}>
+      <Drawer open={open} anchor='right' size='md' onClose={() => setOpen(false)}>
         <ModalClose />
         <DialogTitle>
             < EllipsisList data ={data} updateQty={updateQty} />
