@@ -60,6 +60,8 @@ function DrawerAppBar(props) {
 
 
   // right drawer  case
+  const{cart,setCart} =useContext(CartContext)
+
 
    const[open,setOpen] =React.useState(false)
     const carticon =()=>{
@@ -69,12 +71,37 @@ function DrawerAppBar(props) {
    
   }
 
+    // update the product quanty
+
+    const updateQty =(type,id)=>{
+        console.log("type",type,id)
+
+     const cartData =JSON.parse(localStorage.getItem('cart'))||[]
+    
+    const index =cartData.findIndex((v)=>v.id===id)
+    if(type==='+'){
+
+    cartData.splice(index,1,{...cartData[index],qty:cartData[index].qty + 1})
+
+
+    }else{
+    cartData.splice(index,1,{...cartData[index],qty:cartData[index].qty - 1})
+
+    }
+
+    localStorage.setItem('cart',JSON.stringify(cartData))
+
+    setCart(cartData)
+
+
+
+    }
+
 
     // making the cart length of a cart
 
     // const[cart,setCart]=useState(0)
 
-    const{cart,setCart} =useContext(CartContext)
     const[num,setNum] =useState(0)
     
     React.useEffect(()=>{
@@ -134,7 +161,7 @@ function DrawerAppBar(props) {
           </Box>
           
 
-          < Rightdrawer open={open} setOpen={setOpen} />
+          < Rightdrawer open={open} setOpen={setOpen}  updateQty={updateQty}  />
         </Toolbar>
         
        

@@ -7,7 +7,7 @@ import ModalClose from '@mui/joy/ModalClose';
 import EllipsisList from './list'
 import CartContext from '../context/Cart';
 
-export default function DrawerCloseButton({open,setOpen}) {
+export default function DrawerCloseButton({open,setOpen,updateQty}) {
   // const [open, setOpen] = React.useState(false);
 
   const[data,setData] =React.useState([])
@@ -32,7 +32,7 @@ export default function DrawerCloseButton({open,setOpen}) {
       <Drawer open={open} anchor='right' size='medium' onClose={() => setOpen(false)}>
         <ModalClose />
         <DialogTitle>
-            {/* < EllipsisList data ={data} /> */}
+            < EllipsisList data ={data} updateQty={updateQty} />
         </DialogTitle>
       </Drawer>
     </Box>

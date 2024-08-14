@@ -15,8 +15,8 @@ export default function MediaCard({product,viewDetail}) {
   const[data,setData] =useState({})
   const{cart,setCart} =useContext(CartContext)
 
-  console.log(" i am context cart",cart)
-  const addToCart =(id)=>{
+  // console.log(" i am context cart",cart)
+  const addToCart =(id,type)=>{
     
     axios.get(`https://fakestoreapi.com/products/${id}`).then((res)=>{
       // console.log(res.data,"res of single product")
@@ -30,12 +30,37 @@ export default function MediaCard({product,viewDetail}) {
    
 
     const cartData =JSON.parse(localStorage.getItem('cart'))||[]
-    cartData.push(product)
+    cartData.push({...product,qty:1})
+    const index =cartData.findIndex((v)=>v.id===id)
+
+    
+    console.log("id in del",id,index)
+
+    
+    
+    
+    
+    if(type==='+'){
+
+      console.log("type + ko hit kiya re")
+
+    cartData.splice(index,1,{...cartData[index],qty:cartData[index].qty + 1})
+
+
+    }else{
+    cartData.splice(index,1,{...cartData[index],qty:cartData[index].qty - 1})
+
+    }
+
+    
+
+    // setCart(cartData)
+
     localStorage.setItem("cart",JSON.stringify(cartData))
    setCart(cartData.length)
    
 
-    console.log("cart",id,cart)
+    // console.log("cart",id,cart)
 
   }
 
@@ -71,7 +96,7 @@ export default function MediaCard({product,viewDetail}) {
         
       </CardContent>
       <CardActions>
-        <Button size="small" variant="contained" color="success"  className='addBtn' onClick={()=>addToCart(product.id)}>Add To Cart</Button>
+        <Button size="small" variant="contained" color="success"  className='addBtn' onClick={()=>addToCart(product.id,'+')}>Add To Cart</Button>
         <Button size="small" variant="outlined"  className='viewBtn' onClick={()=>viewDetail(product.id)}>View Detail</Button>
       </CardActions>
     </Card>
